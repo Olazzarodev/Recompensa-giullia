@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌸 Minha Jornada</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #E8857A;
+    --rose-light: #F5B8B2;
+    --rose-dark: #C4605A;
+    --cream: #FDF6F0;
+    --warm: #F7EDE6;
+    --gold: #D4A064;
+    --gold-light: #F0D5A8;
+    --green: #7BAF8E;
+    --green-light: #B8D8C4;
+    --text: #3A2E2B;
+    --text-muted: #8A7470;
+    --card: #FFFFFF;
+    --shadow: 0 4px 24px rgba(58,46,43,0.08);
+    --shadow-hover: 0 8px 40px rgba(58,46,43,0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background decorativo */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,133,122,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -150px; left: -150px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(123,175,142,0.10) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HEADER */
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 28px 24px 0;
+    text-align: center;
+  }
+
+  .header-emoji { font-size: 2rem; margin-bottom: 6px; display: block; }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--rose-dark);
+    letter-spacing: -0.5px;
+  }
+
+  header p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-weight: 300;
+  }
+
+  /* MOEDAS / PONTOS */
+  .coins-banner {
+    position: relative;
+    z-index: 10;
+    margin: 20px 20px 0;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
+    border-radius: 20px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 32px rgba(196,96,90,0.30);
+    color: white;
+  }
+
+  .coins-banner .left-info h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .coins-banner .left-info span {
+    font-size: 0.8rem;
+    opacity: 0.85;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .coins-banner .right-icon {
+    font-size: 3.2rem;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+  }
+
+  .streak-info {
+    margin-top: 10px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  /* TABS */
+  .tabs {
+    position: relative; z-index: 10;
+    display: flex;
+    gap: 8px;
+    padding: 16px 20px 0;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 10px 8px;
+    border: none;
+    border-radius: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: var(--warm);
+    color: var(--text-muted);
+  }
+
+  .tab-btn.active {
+    background: var(--text);
+    color: white;
+    box-shadow: 0 4px 16px rgba(58,46,43,0.18);
+  }
+
+  /* SECTIONS */
+  .section { display: none; padding: 16px 20px 100px; position: relative; z-index: 10; }
+  .section.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 14px;
+    transition: box-shadow 0.2s;
+  }
+
+  .card:hover { box-shadow: var(--shadow-hover); }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+    color: var(--text);
+  }
+
+  /* CHECK-IN ITEMS */
+  .checkin-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--warm);
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .checkin-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .checkin-item:first-child { padding-top: 0; }
+
+  .checkin-icon {
+    width: 44px; height: 44px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .icon-food { background: var(--gold-light); }
+  .icon-water { background: #D0E8F5; }
+  .icon-walk { background: var(--green-light); }
+  .icon-gym { background: #E0D5F5; }
+  .icon-sleep { background: #F5D5E8; }
+
+  .checkin-info { flex: 1; }
+  .checkin-info h3 { font-size: 0.92rem; font-weight: 600; }
+  .checkin-info p { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+  .checkin-points {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--gold);
+    background: var(--gold-light);
+    padding: 4px 10px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  .checkin-check {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid #DDD;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+  .checkin-check.done {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+    transform: scale(1.1);
+  }
+
+  /* BOTÃO CHECK-IN */
+  .btn-checkin {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 6px;
+    box-shadow: 0 6px 20px rgba(196,96,90,0.30);
+    transition: all 0.25s;
+    letter-spacing: 0.3px;
+  }
+  .btn-checkin:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(196,96,90,0.38); }
+  .btn-checkin:active { transform: scale(0.98); }
+  .btn-checkin:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* BARRA DE PROGRESSO */
+  .progress-wrap { margin-top: 12px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 6px; }
+  .progress-bar { height: 8px; background: var(--warm); border-radius: 99px; overflow: hidden; }
+  .progress-fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, var(--rose-light), var(--rose));
+    transition: width 0.6s cubic-bezier(.34,1.56,.64,1);
+  }
+
+  /* META DIÁRIA */
+  .daily-goal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .goal-chip {
+    background: var(--warm);
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+  }
+  .goal-chip .val { font-size: 1.5rem; font-weight: 700; color: var(--rose-dark); }
+  .goal-chip .lbl { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+
+  /* LOJA */
+  .shop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .reward-card {
+    background: var(--card);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.25s;
+  }
+  .reward-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+
+  .reward-emoji {
+    font-size: 2.8rem;
+    padding: 20px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--warm);
+  }
+
+  .reward-info { padding: 12px; }
+  .reward-name { font-size: 0.85rem; font-weight: 600; }
+  .reward-desc { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+
+  .reward-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .reward-cost {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--gold);
+    background: var(--gold-light);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .btn-buy {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 10px;
+    background: var(--rose);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-buy:hover { background: var(--rose-dark); }
+  .btn-buy:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* HISTÓRICO */
+  .history-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--warm);
+  }
+  .history-item:last-child { border-bottom: none; }
+
+  .history-dot {
+    width: 36px; height: 36px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .dot-earn { background: var(--green-light); }
+  .dot-spend { background: var(--rose-light); }
+
+  .history-text { flex: 1; }
+  .history-text h4 { font-size: 0.85rem; font-weight: 500; }
+  .history-text p { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; }
+
+  .history-pts {
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .pts-earn { color: var(--green); }
+  .pts-spend { color: var(--rose); }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+    z-index: 1000;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(58,46,43,0.5);
+    z-index: 100;
+    display: flex; align-items: flex-end; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: var(--cream);
+    border-radius: 28px 28px 0 0;
+    padding: 28px 24px 40px;
+    width: 100%;
+    max-width: 480px;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(.34,1.56,.64,1);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+
+  .modal-handle {
+    width: 36px; height: 4px;
+    background: #DDD;
+    border-radius: 99px;
+    margin: 0 auto 20px;
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+  }
+  .modal-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px; }
+
+  .modal-reward-big { font-size: 4rem; text-align: center; margin: 16px 0; }
+
+  .btn-confirm {
+    width: 100%;
+    padding: 16px;
+    border: none; border-radius: 16px;
+    background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 600;
+    cursor: pointer;
+    margin-top: 16px;
+    box-shadow: 0 6px 20px rgba(196,96,90,0.3);
+    transition: all 0.25s;
+  }
+  .btn-confirm:hover { transform: translateY(-2px); }
+
+  .btn-cancel {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid var(--warm);
+    border-radius: 16px;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.2s;
+  }
+  .btn-cancel:hover { border-color: #CCC; }
+
+  /* SECTION TÍTULOS */
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+  }
+  .section-header span { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* CONFETTI */
+  @keyframes confetti-fall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  .confetti-piece {
+    position: fixed;
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 9999;
+    animation: confetti-fall linear forwards;
+  }
+
+  /* ANIMAÇÃO ENTRADA */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section.active > * {
+    animation: fadeUp 0.4s ease forwards;
+  }
+  .section.active > *:nth-child(2) { animation-delay: 0.05s; }
+  .section.active > *:nth-child(3) { animation-delay: 0.10s; }
+
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .empty-state .e-icon { font-size: 2.5rem; margin-bottom: 10px; }
+
+  /* ícone de info configurações */
+  .config-label {
+    font-size: 0.78rem; color: var(--text-muted);
+    display: block; margin-bottom: 6px; font-weight: 500;
+  }
+  .config-input {
+    width: 100%; padding: 10px 14px;
+    border: 1.5px solid var(--warm);
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    background: var(--cream);
+    color: var(--text);
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+  .config-input:focus { outline: none; border-color: var(--rose-light); }
+
+  .config-row { margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="header-emoji">🌸</span>
+  <h1>Minha Jornada</h1>
+  <p id="greeting">Cada passo conta, cada escolha importa ✨</p>
+</header>
+
+<div class="coins-banner">
+  <div class="left-info">
+    <h2 id="total-coins">0</h2>
+    <span>🌟 estrelinhas</span>
+    <div class="streak-info" id="streak-info">🔥 0 dias seguidos</div>
+  </div>
+  <div class="right-icon">⭐</div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('checkin')">Check-in</button>
+  <button class="tab-btn" onclick="switchTab('loja')">Loja 🛍️</button>
+  <button class="tab-btn" onclick="switchTab('historico')">Histórico</button>
+  <button class="tab-btn" onclick="switchTab('config')">⚙️</button>
+</div>
+
+<!-- CHECK-IN -->
+<div class="section active" id="tab-checkin">
+
+  <div class="card">
+    <div class="section-header">
+      <h2 class="card-title" style="margin:0">Meta de hoje</h2>
+      <span id="today-date"></span>
+    </div>
+    <div class="daily-goal">
+      <div class="goal-chip">
+        <div class="val" id="earned-today">0</div>
+        <div class="lbl">estrelinhas hoje</div>
+      </div>
+      <div class="goal-chip">
+        <div class="val" id="items-done">0/5</div>
+        <div class="lbl">tarefas feitas</div>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>Progresso do dia</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="card-title">Marque suas conquistas 💪</h2>
+
+    <div class="checkin-item" onclick="toggleItem('water')">
+      <div class="checkin-icon icon-water">💧</div>
+      <div class="checkin-info">
+        <h3>Bebi bastante água</h3>
+        <p>Pelo menos 2 litros no dia</p>
+      </div>
+      <div class="checkin-points">+5 ⭐</div>
+      <div class="checkin-check" id="check-water">✓</div>
+    </div>
+
+    <div class="checkin-item" onclick="toggleItem('sleep')">
+      <div class="checkin-icon icon-sleep">😴</div>
+      <div class="checkin-info">
+        <h3>Dormi cedo</h3>
+        <p>Na cama antes da meia-noite</p>
+      </div>
+      <div class="checkin-points">+5 ⭐</div>
+      <div class="checkin-check" id="check-sleep">✓</div>
+    </div>
+
+    <div class="checkin-item" onclick="toggleItem('wake')">
+      <div class="checkin-icon icon-food">🌅</div>
+      <div class="checkin-info">
+        <h3>Acordei cedo</h3>
+        <p>Levantei disposta antes de tarde</p>
+      </div>
+      <div class="checkin-points">+15 ⭐</div>
+      <div class="checkin-check" id="check-wake">✓</div>
+    </div>
+
+    <div class="checkin-item" onclick="toggleItem('walk')">
+      <div class="checkin-icon icon-walk">🚶‍♀️</div>
+      <div class="checkin-info">
+        <h3>Me mexi um pouco</h3>
+        <p>Caminhada, escada, qualquer atividade leve</p>
+      </div>
+      <div class="checkin-points">+10 ⭐</div>
+      <div class="checkin-check" id="check-walk">✓</div>
+    </div>
+
+    <div class="checkin-item" onclick="toggleItem('gym')">
+      <div class="checkin-icon icon-gym">🏋️‍♀️</div>
+      <div class="checkin-info">
+        <h3>Treino completo com cardio</h3>
+        <p>Treino + cardio, arrasou!</p>
+      </div>
+      <div class="checkin-points">+25 ⭐</div>
+      <div class="checkin-check" id="check-gym">✓</div>
+    </div>
+
+    <div class="checkin-item" onclick="toggleItem('meals')">
+      <div class="checkin-icon icon-food">🍽️</div>
+      <div class="checkin-info">
+        <h3>Comi direito</h3>
+        <p>Todas as refeições nos horários certos</p>
+      </div>
+      <div class="checkin-points">+15 ⭐</div>
+      <div class="checkin-check" id="check-meals">✓</div>
+    </div>
+
+    <button class="btn-checkin" id="btn-confirm-checkin" onclick="confirmCheckin()">
+      ✨ Confirmar meu dia!
+    </button>
+  </div>
+</div>
+
+<!-- LOJA -->
+<div class="section" id="tab-loja">
+  <div class="section-header">
+    <h2>Loja de Recompensas</h2>
+    <span id="shop-balance">⭐ 0</span>
+  </div>
+
+  <div class="shop-grid" id="shop-grid"></div>
+</div>
+
+<!-- HISTÓRICO -->
+<div class="section" id="tab-historico">
+  <div class="section-header">
+    <h2>Histórico</h2>
+  </div>
+  <div class="card">
+    <div id="history-list"></div>
+  </div>
+</div>
+
+<!-- CONFIGURAÇÕES -->
+<div class="section" id="tab-config">
+  <div class="section-header">
+    <h2>Personalizar</h2>
+  </div>
+  <div class="card">
+    <h2 class="card-title">Seu nome 💕</h2>
+    <div class="config-row">
+      <label class="config-label">Como você quer ser chamada?</label>
+      <input class="config-input" id="conf-name" type="text" placeholder="Ex: Meu amor, Princesa...">
+    </div>
+    <button class="btn-checkin" onclick="saveName()">Salvar nome</button>
+  </div>
+
+  <div class="card">
+    <h2 class="card-title">Recompensas 🎁</h2>
+    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:14px">Adicione prêmios personalizados para ela resgatar</p>
+
+    <div class="config-row">
+      <label class="config-label">Emoji do prêmio</label>
+      <input class="config-input" id="conf-emoji" type="text" placeholder="🍫" maxlength="2">
+    </div>
+    <div class="config-row">
+      <label class="config-label">Nome do prêmio</label>
+      <input class="config-input" id="conf-reward-name" type="text" placeholder="Ex: Brigadeiro especial">
+    </div>
+    <div class="config-row">
+      <label class="config-label">Descrição</label>
+      <input class="config-input" id="conf-reward-desc" type="text" placeholder="Ex: Feito com carinho">
+    </div>
+    <div class="config-row">
+      <label class="config-label">Custo em estrelinhas ⭐</label>
+      <input class="config-input" id="conf-reward-cost" type="number" placeholder="Ex: 50" min="1">
+    </div>
+    <button class="btn-checkin" onclick="addCustomReward()">+ Adicionar recompensa</button>
+  </div>
+
+  <div class="card">
+    <h2 class="card-title">Zona de perigo ⚠️</h2>
+    <button class="btn-cancel" style="margin-top:0" onclick="resetAll()">Resetar tudo</button>
+  </div>
+</div>
+
+<!-- MODAL RESGATE -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h2 class="modal-title">Resgatar recompensa?</h2>
+    <p class="modal-sub" id="modal-sub">Tem certeza que quer usar suas estrelinhas?</p>
+    <div class="modal-reward-big" id="modal-emoji">🎁</div>
+    <p style="text-align:center;font-weight:600;font-size:1rem" id="modal-reward-name"></p>
+    <p style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin-top:4px" id="modal-reward-cost-text"></p>
+    <button class="btn-confirm" onclick="confirmBuy()">Sim, quero resgatar! 🎉</button>
+    <button class="btn-cancel" onclick="closeModal()">Voltar</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ====== RECOMPENSAS PADRÃO (sempre atualizadas) ======
+const DEFAULT_REWARDS = [
+  { id: 1, emoji: '🍬', name: 'Pequeno doce', desc: 'Colher de doce de leite, 1 brigadeiro...', cost: 55 },
+  { id: 2, emoji: '🎂', name: 'Grande doce', desc: 'Pedaço de bolo, pudim, algo especial', cost: 165 },
+  { id: 3, emoji: '💆‍♀️', name: 'Massagem', desc: 'No pé ou nas costas, você escolhe', cost: 220 },
+  { id: 4, emoji: '🎬', name: 'Filme/série chata', desc: 'Você escolhe o que assistir juntos', cost: 330 },
+  { id: 5, emoji: '🍕', name: 'Lanche ou pizza', desc: 'Pedido especial à sua escolha', cost: 440 },
+  { id: 6, emoji: '✨', name: 'Saída top', desc: 'Um programa especial combinado', cost: 825 },
+];
+
+// ====== ESTADO ======
+let state = JSON.parse(localStorage.getItem('jornada_state') || 'null') || {
+  coins: 0,
+  streak: 0,
+  lastCheckin: null,
+  todayItems: {},
+  todayConfirmed: false,
+  history: [],
+  userName: 'você',
+  rewards: DEFAULT_REWARDS
+};
+
+// Sempre sincroniza as recompensas padrão (ids 1-6) com os valores atuais
+// mas preserva recompensas customizadas adicionadas pelo usuário (id > 6)
+const customRewards = (state.rewards || []).filter(r => r.id > 6);
+state.rewards = [...DEFAULT_REWARDS, ...customRewards];
+
+const ITEMS = {
+  water: { label: 'Bebi bastante água', pts: 5 },
+  sleep: { label: 'Dormi cedo', pts: 5 },
+  wake:  { label: 'Acordei cedo', pts: 15 },
+  walk:  { label: 'Me mexi um pouco', pts: 10 },
+  gym:   { label: 'Treino completo com cardio', pts: 25 },
+  meals: { label: 'Comi direito', pts: 15 }
+};
+
+let pendingBuy = null;
+
+function save() {
+  localStorage.setItem('jornada_state', JSON.stringify(state));
+}
+
+// ====== INIT ======
+function init() {
+  const today = new Date().toDateString();
+  if (state.lastCheckin !== today) {
+    state.todayItems = {};
+    state.todayConfirmed = false;
+    // Verificar streak
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    if (state.lastCheckin !== yesterday.toDateString() && state.lastCheckin !== null) {
+      // quebrou streak
+    }
+    save();
+  }
+
+  document.getElementById('today-date').textContent = new Date().toLocaleDateString('pt-BR', { day:'2-digit', month:'short' });
+  document.getElementById('conf-name').value = state.userName !== 'você' ? state.userName : '';
+
+  updateUI();
+  renderShop();
+  renderHistory();
+}
+
+function updateUI() {
+  document.getElementById('total-coins').textContent = state.coins;
+  document.getElementById('shop-balance').textContent = `⭐ ${state.coins}`;
+  document.getElementById('streak-info').textContent = `🔥 ${state.streak} dia${state.streak !== 1 ? 's' : ''} seguido${state.streak !== 1 ? 's' : ''}`;
+  document.getElementById('greeting').textContent = getGreeting();
+
+  // Update check marks
+  let earnedToday = 0, doneCount = 0;
+  for (const [key, info] of Object.entries(ITEMS)) {
+    const done = !!state.todayItems[key];
+    const el = document.getElementById(`check-${key}`);
+    if (done) { el.classList.add('done'); earnedToday += info.pts; doneCount++; }
+    else el.classList.remove('done');
+  }
+
+  document.getElementById('earned-today').textContent = earnedToday;
+  document.getElementById('items-done').textContent = `${doneCount}/6`;
+  const pct = Math.round((doneCount / 6) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-pct').textContent = pct + '%';
+
+  const btn = document.getElementById('btn-confirm-checkin');
+  if (state.todayConfirmed) {
+    btn.textContent = '✅ Check-in feito hoje!';
+    btn.disabled = true;
+  } else {
+    btn.textContent = '✨ Confirmar meu dia!';
+    btn.disabled = doneCount === 0;
+  }
+}
+
+function getGreeting() {
+  const h = new Date().getHours();
+  const name = state.userName;
+  if (h < 12) return `Bom dia, ${name}! Comece bem o dia ☀️`;
+  if (h < 18) return `Boa tarde, ${name}! Você está indo bem 💪`;
+  return `Boa noite, ${name}! Veja seu progresso 🌙`;
+}
+
+// ====== CHECK-IN ======
+function toggleItem(key) {
+  if (state.todayConfirmed) { showToast('Você já fez o check-in de hoje! 🎉'); return; }
+  state.todayItems[key] = !state.todayItems[key];
+  save();
+  updateUI();
+}
+
+function confirmCheckin() {
+  const doneItems = Object.entries(state.todayItems).filter(([k,v]) => v);
+  if (doneItems.length === 0) return;
+
+  let pts = 0;
+  const today = new Date().toDateString();
+
+  for (const [key] of doneItems) {
+    pts += ITEMS[key].pts;
+  }
+
+  // Bônus streak
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  if (state.lastCheckin === yesterday.toDateString()) {
+    state.streak++;
+  } else {
+    state.streak = 1;
+  }
+
+  let bonusPts = 0;
+  if (state.streak > 0 && state.streak % 7 === 0) {
+    bonusPts = 30;
+    showToast(`🔥 ${state.streak} dias seguidos! +${bonusPts} bônus!`);
+  }
+
+  state.coins += pts + bonusPts;
+  state.lastCheckin = today;
+  state.todayConfirmed = true;
+
+  state.history.unshift({
+    type: 'earn',
+    text: `Check-in do dia (${doneItems.length} conquistas)`,
+    pts: pts + bonusPts,
+    date: new Date().toLocaleDateString('pt-BR')
+  });
+  if (state.history.length > 50) state.history.pop();
+
+  save();
+  updateUI();
+  renderHistory();
+  renderShop();
+
+  showToast(`+${pts + bonusPts} estrelinhas! Arrasou! 🌟`);
+  if (doneItems.length === 6) {
+    setTimeout(() => launchConfetti(), 300);
+  }
+}
+
+// ====== LOJA ======
+function renderShop() {
+  const grid = document.getElementById('shop-grid');
+  grid.innerHTML = state.rewards.map(r => `
+    <div class="reward-card">
+      <div class="reward-emoji">${r.emoji}</div>
+      <div class="reward-info">
+        <div class="reward-name">${r.name}</div>
+        <div class="reward-desc">${r.desc}</div>
+        <div class="reward-footer">
+          <div class="reward-cost">${r.cost} ⭐</div>
+          <button class="btn-buy" onclick="openModal(${r.id})" ${state.coins < r.cost ? 'disabled' : ''}>
+            Resgatar
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openModal(id) {
+  pendingBuy = state.rewards.find(r => r.id === id);
+  if (!pendingBuy) return;
+  document.getElementById('modal-emoji').textContent = pendingBuy.emoji;
+  document.getElementById('modal-reward-name').textContent = pendingBuy.name;
+  document.getElementById('modal-reward-cost-text').textContent = `Vai usar ${pendingBuy.cost} estrelinhas`;
+  document.getElementById('modal-sub').textContent = `Você tem ${state.coins} estrelinhas`;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  pendingBuy = null;
+}
+
+function confirmBuy() {
+  if (!pendingBuy || state.coins < pendingBuy.cost) return;
+  state.coins -= pendingBuy.cost;
+  state.history.unshift({
+    type: 'spend',
+    text: `Resgatou: ${pendingBuy.name} ${pendingBuy.emoji}`,
+    pts: pendingBuy.cost,
+    date: new Date().toLocaleDateString('pt-BR')
+  });
+  save();
+  closeModal();
+  updateUI();
+  renderShop();
+  renderHistory();
+  showToast(`${pendingBuy.emoji} Aproveite bem! Você merece!`);
+  launchConfetti();
+}
+
+// ====== HISTÓRICO ======
+function renderHistory() {
+  const list = document.getElementById('history-list');
+  if (state.history.length === 0) {
+    list.innerHTML = `<div class="empty-state"><div class="e-icon">📋</div>Nenhum registro ainda.<br>Faça seu primeiro check-in!</div>`;
+    return;
+  }
+  list.innerHTML = state.history.slice(0, 20).map(h => `
+    <div class="history-item">
+      <div class="history-dot ${h.type === 'earn' ? 'dot-earn' : 'dot-spend'}">
+        ${h.type === 'earn' ? '⭐' : '🎁'}
+      </div>
+      <div class="history-text">
+        <h4>${h.text}</h4>
+        <p>${h.date}</p>
+      </div>
+      <div class="history-pts ${h.type === 'earn' ? 'pts-earn' : 'pts-spend'}">
+        ${h.type === 'earn' ? '+' : '-'}${h.pts}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ====== CONFIG ======
+function saveName() {
+  const val = document.getElementById('conf-name').value.trim();
+  if (!val) return;
+  state.userName = val;
+  save();
+  updateUI();
+  showToast(`Olá, ${val}! 💕`);
+}
+
+function addCustomReward() {
+  const emoji = document.getElementById('conf-emoji').value.trim() || '🎁';
+  const name = document.getElementById('conf-reward-name').value.trim();
+  const desc = document.getElementById('conf-reward-desc').value.trim();
+  const cost = parseInt(document.getElementById('conf-reward-cost').value);
+
+  if (!name || !cost || cost < 1) { showToast('Preencha nome e custo!'); return; }
+
+  const newId = Date.now();
+  state.rewards.push({ id: newId, emoji, name, desc: desc || '', cost });
+  save();
+  renderShop();
+  showToast(`🎁 "${name}" adicionado à loja!`);
+
+  document.getElementById('conf-emoji').value = '';
+  document.getElementById('conf-reward-name').value = '';
+  document.getElementById('conf-reward-desc').value = '';
+  document.getElementById('conf-reward-cost').value = '';
+}
+
+function resetAll() {
+  if (confirm('Tem certeza? Isso vai apagar tudo!')) {
+    localStorage.removeItem('jornada_state');
+    location.reload();
+  }
+}
+
+// ====== TABS ======
+function switchTab(tab) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`tab-${tab}`).classList.add('active');
+  event.target.classList.add('active');
+
+  if (tab === 'loja') renderShop();
+  if (tab === 'historico') renderHistory();
+}
+
+// ====== TOAST ======
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ====== CONFETTI ======
+function launchConfetti() {
+  const colors = ['#E8857A','#D4A064','#7BAF8E','#F5B8B2','#B8D8C4','#F0D5A8'];
+  for (let i = 0; i < 40; i++) {
+    setTimeout(() => {
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      c.style.cssText = `
+        left:${Math.random()*100}vw;
+        top:-10px;
+        background:${colors[Math.floor(Math.random()*colors.length)]};
+        animation-duration:${1.5+Math.random()*1.5}s;
+        animation-delay:${Math.random()*0.5}s;
+        width:${6+Math.random()*6}px;
+        height:${6+Math.random()*6}px;
+        border-radius:${Math.random()>0.5?'50%':'2px'};
+      `;
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 3500);
+    }, i * 40);
+  }
+}
+
+// Fechar modal ao clicar fora
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+
+init();
+</script>
+</body>
+</html>
